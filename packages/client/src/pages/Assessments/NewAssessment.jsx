@@ -10,13 +10,14 @@ const categoryPoints = {
 export const NewAssessment = () => {
   const [ points, setPoints ] = useState(0);
   const { formState: { errors }, handleSubmit, register, watch } = useForm();
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
 
     const { category1, category2, category3, category4, category5 } = data;
     const sum = parseInt(category1) +
     parseInt(category2) + parseInt(category3) + parseInt(category4) + parseInt(category5);
     console.log(sum);
     setPoints(sum);
+    await AssessmentService.submit(data);
   };
 
   const value1 = watch(`category1`);
