@@ -7,6 +7,17 @@ const categoryPoints = {
   value0: 0, value1: 1,
 };
 
+function determineRisklevel(score) {
+  switch (true) {
+    case score >= 2 && score === 3:
+      return `Medium`;
+    case score >= 4 && score === 5:
+      return `High`;
+    default:
+      return `Low`;
+  }
+}
+
 export const NewAssessment = () => {
   const [ points, setPoints ] = useState(0);
   const { formState: { errors }, handleSubmit, register, watch } = useForm();
@@ -17,6 +28,10 @@ export const NewAssessment = () => {
     parseInt(category2) + parseInt(category3) + parseInt(category4) + parseInt(category5);
     console.log(sum);
     setPoints(sum);
+    data.score = sum;
+    data.instrumentType = 1;
+    data.riskLevel = determineRisklevel(sum);
+
     await AssessmentService.submit(data);
   };
 
@@ -43,11 +58,11 @@ export const NewAssessment = () => {
       <h3> Points: {points} </h3>
       <div className="container">
         <label htmlFor="firstName">What is the Cat Name?</label>
-        <input type="text" {...register(`firstName`, { required: true })} placeholder="Cat Name" />
+        <input type="text" {...register(`catName`, { required: true })} placeholder="Cat Name" />
       </div>
       <div className="container">
         <label htmlFor="firstName">What is the Cats Date of Birth?</label>
-        <input type="date" {...register(`dateOfBirth`, { required: true })} placeholder="BirthDate" />
+        <input type="date" {...register(`catDateOfBirth`, { required: true })} placeholder="BirthDate" />
       </div>
       <div className="container">
         <label htmlFor="category1">Previous contact with the Cat Judicial System</label>

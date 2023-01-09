@@ -21,7 +21,7 @@ assessmentRouter.post(
       ResponseHandler(
         res,
         `Submitted assessment`,
-        { assessment },
+        result,
       );
     } catch (err) {
       next(err);
