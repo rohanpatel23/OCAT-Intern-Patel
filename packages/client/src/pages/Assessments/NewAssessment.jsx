@@ -9,12 +9,14 @@ const categoryPoints = {
 
 function determineRisklevel(score) {
   switch (true) {
-    case score >= 2 && score === 3:
+    case score >= 2 && score <= 3:
       return `Medium`;
-    case score >= 4 && score === 5:
+    case score >= 4 && score <= 5:
       return `High`;
-    default:
+    case score >= 0 && score <= 1:
       return `Low`;
+    default:
+      return ``;
   }
 }
 
