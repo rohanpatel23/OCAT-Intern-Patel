@@ -50,7 +50,7 @@ InferCreationAttributes<Assessment>
       },
       catDateOfBirth: {
         allowNull: false,
-        type: DataTypes.DATEONLY,
+        type: DataTypes.DATE,
       },
       createdAt: {
         allowNull: false,

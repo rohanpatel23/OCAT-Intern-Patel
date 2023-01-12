@@ -7,7 +7,7 @@ const categoryPoints = {
   value0: 0, value1: 1,
 };
 
-function determineRisklevel(score) {
+function riskLevel(score) {
   switch (true) {
     case score >= 2 && score <= 3:
       return `Medium`;
@@ -32,7 +32,7 @@ export const NewAssessment = () => {
     setPoints(sum);
     data.score = sum;
     data.instrumentType = 1;
-    data.riskLevel = determineRisklevel(sum);
+    data.riskLevel = riskLevel(sum);
 
     await AssessmentService.submit(data);
   };
