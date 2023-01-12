@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useTable } from 'react-table';
+import { useSortBy, useTable } from 'react-table';
 import { AssessmentService } from '../../services/AssessmentService';
 import '../../scss/form.scss';
 
@@ -11,12 +11,7 @@ function Table({ columns, data }) {
     headerGroups,
     prepareRow,
     rows,
-  } = useTable(
-    {
-      columns,
-      data,
-    }
-  );
+  } = useTable({ columns, data }, useSortBy);
 
   // Render the UI for your table
   return (
@@ -27,12 +22,19 @@ function Table({ columns, data }) {
             {headerGroups && headerGroups.map(headerGroup =>
               <tr {...headerGroup.getHeaderGroupProps()}>
                 {headerGroup.headers.map(column =>
-                  <th {...column.getHeaderProps()}>{column.render(`Header`)}</th>)}
+                  <th {...column.getHeaderProps(column.getSortByToggleProps())}>{column.render(`Header`)}
+                    <span>
+                      {column.isSorted ?
+                        column.isSortedDesc ?
+                          ` 🔽` :
+                          ` 🔼` :
+                        ``}
+                    </span>
+                  </th>)}
               </tr>)}
           </thead>
           <tbody {...getTableBodyProps()}>
             {rows && rows.map(row => {
-              console.log(data, `inside row page map`);
               prepareRow(row);
               return (
                 <tr {...row.getRowProps()}>
@@ -68,24 +70,28 @@ export const AssessmentList = () => {
         Header: ` `,
         columns: [
           {
-            Header: `Assessment Type`,
-            accessor: `instrumentType`,
-          },
-          {
-            Header: `Score`,
-            accessor: `score`,
-          },
-          {
-            Header: `Risk Level`,
-            accessor: `riskLevel`,
-          },
-          {
             Header: `Cat Name`,
             accessor: `catName`,
           },
           {
             Header: `Birth Date`,
             accessor: `catDateOfBirth`,
+          },
+          {
+            Header: `Risk Level`,
+            accessor: `riskLevel`,
+          },
+          {
+            Header: `Score`,
+            accessor: `score`,
+          },
+          {
+            Header: `Assessment Type`,
+            accessor: `instrumentType`,
+          },
+          {
+            Header: `Creation Date`,
+            accessor: `createdAt`,
           },
 
         ],
