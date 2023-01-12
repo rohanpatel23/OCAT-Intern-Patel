@@ -93,6 +93,12 @@ export const AssessmentList = () => {
             Header: `Creation Date`,
             accessor: `createdAt`,
           },
+          {
+            Cell: ({ row }) =>
+              <button onClick={() => row.original}>Delete</button>,
+            Header: `Delete`,
+
+          },
 
         ],
       },

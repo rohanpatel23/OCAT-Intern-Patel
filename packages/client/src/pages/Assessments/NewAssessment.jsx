@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { AssessmentService } from '../../services/AssessmentService';
+import '../../scss/form.scss';
 
 const categoryPoints = {
   value0: 0, value1: 1,
