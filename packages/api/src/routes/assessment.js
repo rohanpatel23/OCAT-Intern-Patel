@@ -28,6 +28,29 @@ assessmentRouter.post(
   },
 );
 
+assessmentRouter.post(
+  `/delete`,
+  async (req, res, next) => {
+    try {
+      console.log(req);
+      const { id } = req.body;
+      await AssessmentService.delete(id);
+      // console.log(result.toJSON());
+
+      // verify that your data is making it here to the API by using console.log(assessment);
+      // call the AssessmentService.submit function from packages/api/src/microservices/Assessment-Service.js and
+      // supply the correct parameters
+
+      ResponseHandler(
+        res,
+        `Sucessfully Deleted`,
+      );
+    } catch (err) {
+      next(err);
+    }
+  },
+);
+
 assessmentRouter.get(
   `/list`,
 

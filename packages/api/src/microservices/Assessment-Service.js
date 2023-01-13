@@ -11,6 +11,17 @@ exports.submit = async (assessment) => {
     score: assessment.score,
 
   });
+
+};
+
+exports.delete = async (id) => {
+  const rowId = parseInt(id);
+  console.log(id);
+  await Assessment.destroy({
+    where: {
+      id: rowId,
+    },
+  });
 };
 
 // use the sequelize model Assessments from packages/api/src/database/models to fetch

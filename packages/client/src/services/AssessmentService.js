@@ -1,3 +1,4 @@
+import { AssessmentList } from '../pages/Assessments/AssessmentList';
 import Axios from '../utils/http.config';
 
 export class AssessmentService {
@@ -8,6 +9,16 @@ export class AssessmentService {
       // NOTE: the http.config file automatically adds /api to the front of your url
       return Axios.post(`/assessment/submit`, { assessment })
         .then(response => response.data);
+    }
+    catch (err) {
+      throw new Error(`${err.response.statusText} - ${err.response.data.message}`);
+    }
+  }
+
+  static delete(id) {
+    try {
+      console.log(id);
+      return Axios.post(`/assessment/delete`, { id });
     }
     catch (err) {
       throw new Error(`${err.response.statusText} - ${err.response.data.message}`);
@@ -34,3 +45,5 @@ export class AssessmentService {
     }
   }
 }
+
+// UPDATE "posts" SET "deletedAt"=[timestamp] WHERE "deletedAt" IS NULL AND "id" = 1

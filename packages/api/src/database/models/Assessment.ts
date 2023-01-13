@@ -61,11 +61,14 @@ InferCreationAttributes<Assessment>
         type: DataTypes.DATE,
       },
       deletedAt: {
+        field: `deleted_at`,
         type: DataTypes.DATE,
       },
       /* eslint-enable sort-keys */
     }, {
+      paranoid: true,
       sequelize,
+      timestamps: true,
     });
 
     return Assessment;

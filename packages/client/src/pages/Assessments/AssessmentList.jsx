@@ -55,6 +55,11 @@ export const AssessmentList = () => {
   const [ assessments, setAssessments ] = useState([]);
   // fetch all assessments using the AssessmentService.getList function from OCAT/client/services/AssessmentService.js
 
+  const handleDelete = async (row) => {
+    console.log(row, ` i am inside delete`);
+    await AssessmentService.delete(row.original.id);
+  };
+
   useEffect(() => {
     const fetchAssessments = async () => {
       setAssessments(await AssessmentService.getList());
@@ -95,7 +100,7 @@ export const AssessmentList = () => {
           },
           {
             Cell: ({ row }) =>
-              <button onClick={() => row.original}>Delete</button>,
+              <button onClick={() => handleDelete(row)}>Delete</button>,
             Header: `Delete`,
 
           },
